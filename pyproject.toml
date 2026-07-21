@@ -30,7 +30,7 @@ classifiers = [
 # ---- Main dependencies ----
 dependencies = [
   "attrmagic>=0.2.3",
-  "pydantic>=2.11.9",
+  "pydantic>=2.10",
   "pydantic-settings>=2.11.0",
   "rich>=14.0.0",
   "typer>=0.24.1",
