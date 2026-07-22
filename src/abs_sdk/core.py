@@ -1,15 +1,18 @@
 """Project level core functionality that doesn't fit into a more specific module."""
 
 import datetime
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from enum import StrEnum
 from os import PathLike
 from typing import override
 
+import httpx
 from attrmagic import ClassBase
 from pydantic import ConfigDict, SecretStr
 from pydantic.alias_generators import to_camel
 from typer import Context
+from yarl import URL
 
 from .logging_config import get_logger, set_log_level
 
@@ -17,6 +20,26 @@ logger = get_logger(__name__)
 
 # A type alias for inputs that can be either a string or a PathLike object representing a filesystem path. This is used for type annotations in functions that accept file paths, allowing for flexibility in the types of path inputs while maintaining type safety.
 type PathInput = PathLike[str] | str
+
+# type aliases from httpx and yarl for better type hinting in the client code
+type QueryValue = str | int | float | bool | None
+type HeaderTypes = (
+    httpx.Headers
+    | Mapping[str, str]
+    | Mapping[bytes, bytes]
+    | Sequence[tuple[str, str]]
+    | Sequence[tuple[bytes, bytes]]
+)
+type PrimitiveData = str | int | float | bool | None
+type URLTypes = URL | str
+type QueryParamTypes = (
+    httpx.QueryParams
+    | Mapping[str, PrimitiveData | Sequence[PrimitiveData]]
+    | list[tuple[str, PrimitiveData]]
+    | tuple[tuple[str, PrimitiveData], ...]
+    | str
+    | bytes
+)
 
 
 @dataclass
