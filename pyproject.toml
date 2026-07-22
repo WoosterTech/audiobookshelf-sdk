@@ -30,10 +30,12 @@ classifiers = [
 # ---- Main dependencies ----
 dependencies = [
   "attrmagic>=0.2.3",
+  "httpx>=0.28.1",
   "pydantic>=2.10",
   "pydantic-settings>=2.11.0",
   "rich>=14.0.0",
   "typer>=0.24.1",
+  "yarl>=1.24.5",
 ]
 dynamic = ["version"]
 
