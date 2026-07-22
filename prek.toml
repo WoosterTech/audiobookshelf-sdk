@@ -52,12 +52,12 @@ hooks = [{ id = "check-json5" }]
 
 [[repos]]
 repo = "https://github.com/pypa/pip-audit"
-rev = "v2.10.0"
+rev = "v2.10.1"
 hooks = [{ id = "pip-audit", args = [".", "-vvv"] }]
 
 [[repos]]
 repo = "https://github.com/astral-sh/ruff-pre-commit"
-rev = "v0.15.12"
+rev = "v0.15.22"
 hooks = [
   { id = "ruff-check", args = ["--fix", "--config", "ruff.toml"] },
   { id = "ruff-format" }
@@ -65,7 +65,7 @@ hooks = [
 
 [[repos]]
 repo = "https://github.com/commitizen-tools/commitizen"
-rev = "v4.16.0"
+rev = "v4.16.5"
 hooks = [{ id = "commitizen" }]
 
 [[repos]]

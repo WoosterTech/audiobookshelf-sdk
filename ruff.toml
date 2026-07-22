@@ -43,5 +43,5 @@ ignore = [
 ]
 
 [lint.flake8-type-checking]
-runtime-evaluated-base-classes = ["pydantic.BaseModel", "typer.Typer"]
+runtime-evaluated-base-classes = ["pydantic.BaseModel", "typer.Typer", "core.APIModel", "core.APIResponseModel"]
 quote-annotations = true
