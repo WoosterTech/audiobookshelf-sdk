@@ -34,37 +34,32 @@ class BookResponse(_BookResponseBase):
     ebook_file: EBookFileResponse | None
 
 
-class BookResponseMinified(_BookResponseBase):
+class _BookResponseCommon(_BookResponseBase):
+    size: int
+    duration: float
+
+    @cached_property
+    def duration_timedelta(self) -> "dt.timedelta":
+        """Convert the duration in seconds to a timedelta object."""
+
+        return dt.timedelta(seconds=self.duration)
+
+
+class BookResponseMinified(_BookResponseCommon):
     """A minified version of the BookResponse model, containing only essential fields."""
 
     metadata: BookMetadataResponseMinified
     num_tracks: int
     num_audio_files: int
     num_chapters: int
-    duration: float
-    size: int
     ebook_format: str | None = None
 
-    @cached_property
-    def duration_timedelta(self) -> "dt.timedelta":
-        """Convert the duration in seconds to a timedelta object."""
 
-        return dt.timedelta(seconds=self.duration)
-
-
-class BookResponseExpanded(_BookResponseBase):
+class BookResponseExpanded(_BookResponseCommon):
     """An expanded version of the BookResponse model, potentially including additional fields or relationships."""
 
     metadata: BookMetadataResponseExpanded
-    duration: float
-    size: int
     tracks: list[AudioTrackResponse]
-
-    @cached_property
-    def duration_timedelta(self) -> "dt.timedelta":
-        """Convert the duration in seconds to a timedelta object."""
-
-        return dt.timedelta(seconds=self.duration)
 
 
 class BookResponseGeneric(_BookResponseBase):

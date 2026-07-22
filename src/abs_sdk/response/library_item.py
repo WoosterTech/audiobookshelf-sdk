@@ -4,6 +4,7 @@ from enum import StrEnum
 from functools import cached_property
 from typing import TYPE_CHECKING
 
+from attrmagic import SimpleListRoot
 from attrmagic.sentinels import MISSING, Missing
 
 from abs_sdk.core import APIResponseModel, datetime_from_epoch_ms
@@ -109,3 +110,10 @@ class LibraryItemResponseGeneric(_LibraryItemResponseBase):
 
     num_files: int | Missing = MISSING
     size: int | Missing = MISSING
+
+
+class LibraryItemsResponseMinified(SimpleListRoot[LibraryItemResponseMinified]):
+    """A response model representing a list of minified library items.
+
+    This is included in the response from `api/me/items-in-progress` endpoint.
+    """
