@@ -25,9 +25,11 @@ class AudiobookshelfClient:
         self._base_url: URL = URL(base_url)
         self._token: SecretToken = SecretToken(token)
         self._client: httpx.Client = httpx.Client(timeout=timeout_seconds, verify=verify_ssl)
-        from abs_sdk.api_me import MeAPI
+        from abs_sdk.api.libraries import LibrariesAPI
+        from abs_sdk.api.me import MeAPI
 
         self.me: MeAPI = MeAPI(self)
+        self.libraries: LibrariesAPI = LibrariesAPI(self)
 
     @property
     def base_url(self) -> URL:

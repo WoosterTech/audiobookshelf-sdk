@@ -28,6 +28,9 @@ make lint
 # Run tests:
 make test
 
+# Run functional tests against a real Audiobookshelf server:
+make test-functional
+
 # Delete all the build artifacts:
 make clean
 
@@ -37,6 +40,18 @@ make upgrade
 # To run tests by hand:
 uv run pytest   # all tests
 uv run pytest -s src/module/some_file.py  # one test, showing outputs
+
+# Functional tests (real server) are opt-in and require env vars:
+# AUDIOBOOKSHELF_TEST_BASE_URL=https://abs.example.com
+# AUDIOBOOKSHELF_TEST_TOKEN=your_api_token
+# optional: AUDIOBOOKSHELF_TEST_VERIFY_SSL=true
+# optional: AUDIOBOOKSHELF_TEST_LIBRARY_ID=<library-id-to-exercise-items-endpoint>
+# You can place these in .env.functional for local CLI testing.
+# Existing env vars in your shell always take precedence over .env.functional.
+uv run pytest tests/functional --run-functional --basetemp=.pytest_tmp -q
+
+# Optional: use a different env file path
+uv run pytest tests/functional --run-functional --functional-env-file=.env.abs-local --basetemp=.pytest_tmp -q
 
 # Build and install current dev executables, to let you use your dev copies
 # as local tools:

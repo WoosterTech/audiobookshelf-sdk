@@ -1,3 +1,3 @@
-from abs_sdk.client import AudiobookshelfClient
+from abs_sdk.api.client import AudiobookshelfClient
 
 __all__ = ["AudiobookshelfClient"]
