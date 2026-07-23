@@ -33,11 +33,19 @@ dependencies = [
   "httpx>=0.28.1",
   "pydantic>=2.10",
   "pydantic-settings>=2.11.0",
-  "rich>=14.0.0",
-  "typer>=0.24.1",
   "yarl>=1.23.0",
 ]
 dynamic = ["version"]
+
+[project.optional-dependencies]
+cli = [
+  "jinja2>=3.1.6",
+  "rich>=14.0.0",
+  "typer>=0.24.1",
+  "jinja2>=3.1.6",
+  "ipython>=9.15.0",
+  "traitlets>=5.15.1",
+]
 
 [project.urls]
 Repository = "https://github.com/WoosterTech/audiobookshelf-sdk"
@@ -45,8 +53,8 @@ Repository = "https://github.com/WoosterTech/audiobookshelf-sdk"
 # Documentation = "https://..."
 
 [project.scripts]
-# Add script entry points here:
-abs = "abs_sdk.abs_sdk:cli"
+# CLI is optional, install with: pip install audiobookshelf-sdk[cli]
+abs = "abs_sdk.cli:cli"
 
 # ---- Build system ----
 
@@ -58,8 +66,6 @@ dev = [
   "basedpyright>=1.31.0",
   "codespell>=2.4.1",
   "deptry>=0.23.0",
-  "ipython>=9.8.0",
-  "jinja2>=3.1.6",
   "prek>=0.4.3",
   "pydantic>=2.11.9",
   "pytest>=8.3.5",
@@ -81,8 +87,8 @@ build-backend = "hatchling.build"
 # skip = "foo.py,bar.py"
 
 # ---- Dev dependencies ----
-[tool.deptry]
-extend_exclude = ["src/abs_sdk/devtools\\.py"]
+# [tool.deptry]
+# extend_exclude = ["src/abs_sdk/cli/devtools\\.py"]
 
 [tool.deptry.per_rule_ignores]
 DEP003 = ["abs_sdk"]
