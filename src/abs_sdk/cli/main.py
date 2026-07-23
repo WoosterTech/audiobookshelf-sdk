@@ -1,10 +1,31 @@
+"""Main CLI entry point for the SDK."""
+
 from typing import Annotated
 
 import typer
+from typer import Option as TyperOption
 
+from ..logging_config import get_console
 from .core import GlobalCLIOptions, ProjectContext
 from .devtools import app as devtools_cli
-from .logging_config import get_console, verbosity_option
+
+
+def verbosity_option(
+    help_text: str = "Increase verbosity level (can be used multiple times)",
+) -> object:
+    """Create a verbosity command-line option.
+
+    This option can be used multiple times to increase the verbosity level of logging.
+    Each occurrence of the option increases the logging verbosity level.
+
+    Args:
+        help_text: The help text for the command-line option.
+
+    Returns:
+        A Typer option configured for verbosity.
+    """
+    return TyperOption("-v", "--verbose", help=help_text, count=True)  # pyright: ignore[reportAny]
+
 
 cli = typer.Typer(help="Main CLI for audiobookshelf-sdk.")
 console = get_console()
