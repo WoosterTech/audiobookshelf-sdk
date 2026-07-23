@@ -6,8 +6,6 @@ from importlib.util import find_spec
 from types import TracebackType
 from typing import TYPE_CHECKING, cast, final
 
-from typer import Option as TyperOption
-
 from .settings import settings
 
 if TYPE_CHECKING:
@@ -232,23 +230,7 @@ def add_log_level(name: str, level_num: int) -> None:
     setattr(logging.Logger, name.lower(), log_for_level)
 
 
-## CLI Helpers --------------------------------------------------------
-
-
-def verbosity_option(help_text: str = "Increase verbosity level (can be used multiple times)"):  # pyright: ignore[reportAny]
-    """
-    Create a verbosity command-line option.
-
-    This option can be used multiple times to increase the verbosity level of logging.
-    Each occurrence of the option decreases the logging level by 10 (e.g., from WARNING to INFO to DEBUG).
-
-    Args:
-        help_text (str): The help text for the command-line option.
-
-    Returns:
-        typer.Option: A Typer option configured for verbosity.
-    """
-    return TyperOption("-v", "--verbose", help=help_text, count=True)  # pyright: ignore[reportAny]
+## Logging Configuration ------------------------------------------------
 
 
 LEVEL_MAPPING = {

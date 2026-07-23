@@ -2,7 +2,6 @@
 
 import datetime
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
 from enum import StrEnum
 from os import PathLike
 from typing import override
@@ -11,10 +10,9 @@ import httpx
 from attrmagic import ClassBase
 from pydantic import ConfigDict, SecretStr
 from pydantic.alias_generators import to_camel
-from typer import Context
 from yarl import URL
 
-from .logging_config import get_logger, set_log_level
+from .logging_config import get_logger
 
 logger = get_logger(__name__)
 
@@ -45,21 +43,6 @@ type QueryParamTypes = (
 class MediaType(StrEnum):
     BOOK = "book"
     PODCAST = "podcast"
-
-
-@dataclass
-class GlobalCLIOptions:
-    verbosity: int
-    dry_run: bool = False
-
-    def __post_init__(self) -> None:
-        set_log_level(self.verbosity)
-
-
-class ProjectContext(Context):
-    """Custom Typer Context that adds the proper typing for `obj`."""
-
-    obj: GlobalCLIOptions
 
 
 class APIModel(ClassBase):
