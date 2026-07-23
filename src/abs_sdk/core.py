@@ -42,6 +42,11 @@ type QueryParamTypes = (
 )
 
 
+class MediaType(StrEnum):
+    BOOK = "book"
+    PODCAST = "podcast"
+
+
 @dataclass
 class GlobalCLIOptions:
     verbosity: int

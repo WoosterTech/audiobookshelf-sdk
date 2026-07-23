@@ -1,13 +1,12 @@
 """Created by abs_sdk.devtools.create_module."""
 
-from enum import StrEnum
 from functools import cached_property
 from typing import TYPE_CHECKING
 
 from attrmagic import SimpleListRoot
 from attrmagic.sentinels import MISSING, Missing
 
-from abs_sdk.core import APIResponseModel, datetime_from_epoch_ms
+from abs_sdk.core import APIResponseModel, MediaType, datetime_from_epoch_ms
 from abs_sdk.logging_config import get_logger
 from abs_sdk.response.book import (  # noqa: TC001
     BookResponse,
@@ -22,11 +21,6 @@ if TYPE_CHECKING:
     import datetime as dt
 
 logger = get_logger(__name__)
-
-
-class MediaType(StrEnum):
-    BOOK = "book"
-    PODCAST = "podcast"
 
 
 class _LibraryItemResponseBase(APIResponseModel):
@@ -117,3 +111,7 @@ class LibraryItemsResponseMinified(SimpleListRoot[LibraryItemResponseMinified]):
 
     This is included in the response from `api/me/items-in-progress` endpoint.
     """
+
+
+class LibraryItemsResponse(SimpleListRoot[LibraryItemResponse]):
+    """A response model representing a list of library items."""

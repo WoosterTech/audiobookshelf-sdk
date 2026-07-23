@@ -3,7 +3,7 @@ from __future__ import annotations
 from httpx import QueryParams
 from yarl import URL
 
-from abs_sdk.api_resource import APIResource
+from abs_sdk.api.api_resource import APIResource
 from abs_sdk.response.me import ItemsInProgressResponse
 from abs_sdk.response.media_progress import MediaProgressResponse
 
